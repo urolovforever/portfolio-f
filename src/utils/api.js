@@ -7,6 +7,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: false,
 });
 
 // Profile API
@@ -76,6 +77,20 @@ export const projectsAPI = {
       await api.delete(`/projects/${id}/`);
     } catch (error) {
       console.error('Error deleting project:', error);
+      throw error;
+    }
+  },
+};
+
+// Contact API
+export const contactAPI = {
+  // Send contact message
+  send: async (contactData) => {
+    try {
+      const response = await api.post('/contact/', contactData);
+      return response.data;
+    } catch (error) {
+      console.error('Error sending contact message:', error);
       throw error;
     }
   },

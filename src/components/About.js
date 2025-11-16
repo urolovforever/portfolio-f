@@ -41,7 +41,7 @@ const About = () => {
             </p>
 
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              I'm fluent in <span className="font-semibold text-primary-600 dark:text-primary-400">English, Russian, Arabic, and Uzbek</span>,
+              I'm fluent in <span className="font-semibold text-primary-600 dark:text-primary-400">English and Uzbek</span>,
               which helps me collaborate effectively with diverse teams and understand different perspectives in problem-solving.
             </p>
 

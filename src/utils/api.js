@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://nizomjon.pythonanywhere.com';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://nizomjon.pythonanywhere.com/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -11,7 +11,6 @@ const api = axios.create({
 
 // Profile API
 export const profileAPI = {
-  // Get profile information
   get: async () => {
     try {
       const response = await api.get('/profile/');
@@ -25,11 +24,9 @@ export const profileAPI = {
 
 // Projects API
 export const projectsAPI = {
-  // Get all projects
   getAll: async () => {
     try {
       const response = await api.get('/projects/');
-      // Handle paginated response from Django REST Framework
       return response.data.results || response.data;
     } catch (error) {
       console.error('Error fetching projects:', error);
@@ -37,7 +34,6 @@ export const projectsAPI = {
     }
   },
 
-  // Get single project
   getById: async (id) => {
     try {
       const response = await api.get(`/projects/${id}/`);
@@ -48,7 +44,6 @@ export const projectsAPI = {
     }
   },
 
-  // Create project (admin only)
   create: async (projectData) => {
     try {
       const response = await api.post('/projects/', projectData);
@@ -59,7 +54,6 @@ export const projectsAPI = {
     }
   },
 
-  // Update project (admin only)
   update: async (id, projectData) => {
     try {
       const response = await api.put(`/projects/${id}/`, projectData);
@@ -70,7 +64,6 @@ export const projectsAPI = {
     }
   },
 
-  // Delete project (admin only)
   delete: async (id) => {
     try {
       await api.delete(`/projects/${id}/`);

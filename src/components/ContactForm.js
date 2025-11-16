@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaPaperPlane, FaCheckCircle } from 'react-icons/fa';
+import { contactAPI } from '../utils/api';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -20,13 +21,9 @@ const ContactForm = () => {
     e.preventDefault();
     setStatus('submitting');
 
-    // Simulate form submission (replace with actual API call)
     try {
-      // Here you would typically send the data to your backend
-      // await api.post('/contact/', formData);
-
-      // For now, just simulate a delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Send the data to the backend
+      await contactAPI.send(formData);
 
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
@@ -34,6 +31,7 @@ const ContactForm = () => {
       // Reset success message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
+      console.error('Contact form error:', error);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }

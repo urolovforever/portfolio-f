@@ -1,75 +1,54 @@
 # Backend CORS Setup Instructions
 
 ## Muammo
-Frontend `https://nizomjon.pythonanywhere.com` backend bilan bog'lanmayapti chunki CORS (Cross-Origin Resource Sharing) sozlanmagan.
+Frontend `https://nizomjon.pythonanywhere.com` backend bilan bog'lanmayapti chunki CORS faqat `nizomjonurolov.uz` domeniga ruxsat berib qo'yilgan.
 
 ## Yechim
 
 ### 1. PythonAnywhere Backend ni sozlash
 
-#### A. Django CORS Headers o'rnatish
+✅ `django-cors-headers` allaqachon o'rnatilgan va sozlangan!
 
-PythonAnywhere **Bash console** da:
+#### `settings.py` faylini yangilash kerak:
 
-```bash
-pip install django-cors-headers
+PythonAnywhere da Django backend loyihangizda `settings.py` faylini oching va quyidagi qismlarni yangilang:
+
+**1. ALLOWED_HOSTS ni yangilang:**
+```python
+ALLOWED_HOSTS = [
+    'nizomjonurolov.uz',
+    'www.nizomjonurolov.uz',
+    'nizomjon.pythonanywhere.com',  # ← SHU QATORNI QO'SHING
+]
 ```
 
-#### B. `settings.py` faylini yangilash
-
-Django backend loyihangizda `settings.py` faylini oching va quyidagi o'zgarishlarni kiriting:
-
+**2. CORS_ALLOWED_ORIGINS ni yangilang:**
 ```python
-# INSTALLED_APPS ga qo'shing
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
-    # Third party apps
-    'rest_framework',
-    'corsheaders',  # <-- SHU QATORNI QO'SHING
-
-    # Your apps
-    'portfolio',
-    # ...
-]
-
-# MIDDLEWARE ga qo'shing (ENG YUQORIGA!)
-MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # <-- SHU QATORNI ENG YUQORIGA QO'SHING
-    'django.middleware.security.SecurityMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-
-# CORS sozlamalari (faylning oxiriga qo'shing)
-# Development uchun
 CORS_ALLOWED_ORIGINS = [
+    # Production domains
+    "https://nizomjonurolov.uz",
+    "https://www.nizomjonurolov.uz",
+    # Development ← SHU QATORLARNI QO'SHING
     "http://localhost:3000",
     "http://localhost:5000",
     "http://127.0.0.1:3000",
+    "http://127.0.0.1:5000",
 ]
+```
 
-# Agar frontend ham deploy qilgan bo'lsangiz, uning URL ini qo'shing:
-# CORS_ALLOWED_ORIGINS = [
-#     "https://your-frontend-domain.com",
-# ]
-
-# Yoki test uchun barchaga ruxsat berish (PRODUCTION DA ISHLATMANG!)
-# CORS_ALLOW_ALL_ORIGINS = True
-
-# CSRF sozlamalari (kerak bo'lsa)
+**3. CSRF_TRUSTED_ORIGINS ni yangilang:**
+```python
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-    "https://nizomjon.pythonanywhere.com",
+    "https://nizomjonurolov.uz",
+    "https://www.nizomjonurolov.uz",
+    "https://nizomjon.pythonanywhere.com",  # ← SHU QATORNI QO'SHING
 ]
+```
+
+**YOKI TEST UCHUN** (faqat test paytida):
+```python
+# Barcha domenlardan so'rovga ruxsat berish (PRODUCTION DA ISHLATMANG!)
+CORS_ALLOW_ALL_ORIGINS = True
 ```
 
 #### C. PythonAnywhere Web App ni reload qilish

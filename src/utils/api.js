@@ -1,20 +1,21 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://nizomjon.pythonanywhere.com/api';
+// Base URL: .env fayldan olinadi, fallback sifatida Vercel domeni
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://www.nizomjonurolov.uz/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: false,
+  withCredentials: false, // Agar cookie kerak bo'lsa true qilishingiz mumkin
 });
 
 // Profile API
 export const profileAPI = {
   get: async () => {
     try {
-      const response = await api.get('/profile/');
+      const response = await api.get('/profile/'); // Trailing slash muhim
       return response.data;
     } catch (error) {
       console.error('Error fetching profile:', error);
@@ -77,7 +78,6 @@ export const projectsAPI = {
 
 // Contact API
 export const contactAPI = {
-  // Send contact message
   send: async (contactData) => {
     try {
       const response = await api.post('/contact/', contactData);

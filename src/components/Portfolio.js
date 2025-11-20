@@ -105,7 +105,9 @@ const Portfolio = () => {
                   {project.image ? (
                     <img
                       src={project.image}
-                      alt={project.title}
+                      alt={`${project.title} - Web Development Project by Nizomjon Urolov | Portfolio ${project.project_type || 'Project'}`}
+                      title={`${project.title} - ${project.description?.substring(0, 100) || 'Nizomjon Urolov Portfolio Project'}`}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                   ) : (

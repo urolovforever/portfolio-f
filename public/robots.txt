@@ -1,0 +1,47 @@
+# robots.txt for Nizomjon Urolov Portfolio Website
+# https://www.nizomjonurolov.uz
+
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.nizomjonurolov.uz/sitemap.xml
+
+# Crawl-delay for politeness (optional)
+Crawl-delay: 1
+
+# Specific directives for major search engines
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Google Images - allow all images for search
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yandex (popular in CIS countries including Uzbekistan)
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+# Allow all API endpoints to be indexed
+Allow: /api/
+
+# Allow all static assets
+Allow: /static/
+Allow: *.css
+Allow: *.js
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.gif
+Allow: *.svg
+Allow: *.webp

@@ -48,7 +48,9 @@ const HeroSection = () => {
             {profile.profile_image ? (
               <img
                 src={profile.profile_image}
-                alt={profile.name}
+                alt="Nizomjon Urolov (Nizomjon O'rolov) - Junior Web Developer and Cybersecurity Specialist from Tashkent, Uzbekistan | Islom akademiyasi"
+                title="Nizomjon Urolov - Web Developer Portfolio"
+                loading="eager"
                 className="w-full h-full rounded-full object-cover"
               />
             ) : (
